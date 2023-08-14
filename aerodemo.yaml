@@ -405,7 +405,7 @@ extraContainerPorts: []
 ## @param podSecurityContext.seccompProfile.type Set WordPress container's Security Context seccomp profile
 ##
 podSecurityContext:
-  enabled: true
+  enabled: false
   fsGroup: 1000730000
   seccompProfile:
     type: "RuntimeDefault"
@@ -419,7 +419,7 @@ podSecurityContext:
 ## @param containerSecurityContext.capabilities.drop Set WordPress container's Security Context runAsNonRoot
 ##
 containerSecurityContext:
-  enabled: true
+  enabled: false
   runAsNonRoot: true
   runAsUser: 1000730000
   allowPrivilegeEscalation: false
@@ -1132,12 +1132,12 @@ mariadb:
       size: 8Gi
     containerSecurityContext: 
       allowPrivilegeEscalation: false
-      enabled: true
+      enabled: false
       privileged: false
       runAsUser: 1000730000
       runAsNonRoot: true
     podSecurityContext: 
-      enabled: true
+      enabled: false
       fsGroup: 1000730000
 ## External Database Configuration
 ## All of these values are only used if `mariadb.enabled=false`
