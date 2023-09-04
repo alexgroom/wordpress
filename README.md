@@ -1,7 +1,7 @@
 # Using the bitnami Wordpress helm chart
 
 ## Value file
-For OpenShift we need to set user and group id so that it is NOT hardcoded to 1001. Remove runAsuser and FSGroup settings by choosing the supplied value.yaml file
+For OpenShift we need to disable any specific userid hardcoded to 1001. Instead we remove runAsuser and FSGroup settings by disabling the securityContext features in the values.yanl file and let OpenShift choose the user/group.
 
 ## Install helm
 
