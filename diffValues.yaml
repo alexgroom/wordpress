@@ -1,0 +1,37 @@
+## Configure Pods Security Context
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+## @param podSecurityContext.enabled Enabled WordPress pods' Security Context
+## @param podSecurityContext.fsGroup Set WordPress pod's Security Context fsGroup
+## @param podSecurityContext.seccompProfile.type Set WordPress container's Security Context seccomp profile
+##
+podSecurityContext:
+  enabled: false
+containerSecurityContext:
+  enabled: false
+
+## WordPress service parameters
+##
+service:
+  ports:
+    http: 8080
+    https: 8443
+
+## MariaDB chart configuration
+## ref: https://github.com/bitnami/charts/blob/main/bitnami/mariadb/values.yaml
+##
+mariadb:
+  primary:
+    ## MariaDB Primary Persistence parameters
+    ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
+    ## @param mariadb.primary.persistence.enabled Enable persistence on MariaDB using PVC(s)
+    ## @param mariadb.primary.persistence.storageClass Persistent Volume storage class
+    ## @param mariadb.primary.persistence.accessModes [array] Persistent Volume access modes
+    ## @param mariadb.primary.persistence.size Persistent Volume size
+    ##
+    containerSecurityContext: 
+      allowPrivilegeEscalation: false
+      enabled: false
+      privileged: false
+      runAsNonRoot: true
+    podSecurityContext: 
+      enabled: false

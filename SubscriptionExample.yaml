@@ -1,0 +1,37 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  labels:
+    app: wordpress
+    app.kubernetes.io/part-of: wordpress
+    apps.open-cluster-management.io/reconcile-rate: medium
+spec:
+  name: wordpress
+  channel: hchartsbitnamicom-bitnami-ns/hchartsbitnamicom-bitnami
+  packageOverrides:
+    - packageAlias: wordpress
+      packageName: wordpress
+      packageOverrides:
+        - path: spec
+          value:
+            containerSecurityContext:
+              enabled: false
+            mariadb:
+              primary:
+                containerSecurityContext:
+                  allowPrivilegeEscalation: false
+                  enabled: false
+                  privileged: false
+                  runAsNonRoot: true
+                podSecurityContext:
+                  enabled: false
+            podSecurityContext:
+              enabled: false
+            service:
+              ports:
+                http: 8080
+                https: 8443
+  placement:
+    placementRef:
+      name: wordpress-placement-3
+      kind: Placement
